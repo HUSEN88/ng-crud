@@ -1,0 +1,16 @@
+.details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .card {
+    width: 450px;
+    max-width: 100% !important;
+    margin: 0 auto;
+    i {
+      font-size: 16px;
+    }
+    .mobile-icon {
+      font-size: 24px;
+    }
+  }
+}

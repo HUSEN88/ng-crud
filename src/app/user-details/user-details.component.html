@@ -1,0 +1,18 @@
+<div class="details" *ngIf="userDetails">
+  <div class="card border-light mb-3" style="max-width: 18rem;">
+    <div class="card-header"><h5>{{userDetails.name}}</h5></div>
+    <div class="card-body">
+      <p class="card-title"><i class="fa fa-envelope mr-2"></i>{{userDetails.email}}</p>
+      <p class="card-text"><i class="fa fa-mobile mobile-icon mr-2"></i>{{userDetails.phone}}</p>
+      <p class="card-text"><i class="fa fa-location-arrow mr-2"></i>{{userDetails.location}}</p>
+      <a [routerLink]="['/users']" class="btn btn-secondary"><i class="fa fa-long-arrow-left"></i></a>
+    </div>
+  </div>
+</div>
+
+<div class="spinner-grow" role="status" *ngIf="loader">
+  <span class="sr-only">Loading...</span>
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="error">
+  Sorry! Something went wrong while fetching the users. Please try after sometime.
+</div>

@@ -1,0 +1,105 @@
+<div class="header">
+  <div class="search-wrapper">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+      </div>
+      <input type="text" class="form-control"
+      [(ngModel)]="searchText"
+      (input)="searchInput()"
+      placeholder="Search By Email Id"
+      aria-label="Search"
+      aria-describedby="search text box">
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-primary create-btn"(click)="openModal(createTemplate)">Create</button>
+</div>
+<div class="data-wrapper">
+  <table class="table table-hover" *ngIf="users">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Info</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="!searching">
+      <tr *ngFor="let user of users">
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.phone}}</td>
+        <td><a [routerLink]="['/user/',user.id]"><button class="btn btn-primary"><i class="fa fa-info"></i></button></a></td>
+        <td><button (click)="deleteUser(user.id)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="searching">
+      <tr *ngFor="let user of filteredUsers">
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.phone}}</td>
+        <td><a [routerLink]="['/user/',user.id]"><button class="btn btn-primary"><i class="fa fa-info"></i></button></a></td>
+        <td><button (click)="deleteUser(user.id)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="spinner-grow" role="status" *ngIf="loader">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="alert alert-danger" role="alert" *ngIf="error">
+    Sorry! Something went wrong. Please try after sometime.
+  </div>
+</div>
+
+<ng-template #createTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add User</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="alert alert-danger" role="alert" *ngIf="createFailed">
+      Sorry! Something went wrong while Creating the user. Please try after sometime.
+    </div>
+    <form [formGroup]="createForm" (ngSubmit)="createUser(createForm.value)">
+      <div class="mb-1">
+        <label for="">Name</label>
+        <input type="text" formControlName="name" class="form-control mb-2">
+        <div *ngIf="createForm.controls['name'].touched && createForm.controls['name'].invalid" class="alert alert-danger">
+          <div *ngIf="createForm.controls['name'].errors && createForm.controls['name'].errors['required']">Name is required.</div>
+        </div>
+      </div>
+      <div class="mb-1">
+        <label for="">Email</label>
+        <input type="email" formControlName="email" class="form-control mb-2">
+        <div *ngIf="createForm.controls['email'].touched && createForm.controls['email'].invalid" class="alert alert-danger">
+          <div *ngIf="createForm.controls['email'].errors && createForm.controls['email'].errors['required']">Email is required.</div>
+          <div *ngIf="createForm.controls['email'].errors && createForm.controls['email'].errors['email']">Please, enter valid email address.</div>
+        </div>
+      </div>
+      <div class="mb-1">
+        <label for="">Phone Number</label>
+        <input type="tel" formControlName="phone" class="form-control mb-2">
+        <div *ngIf="createForm.controls['phone'].touched && createForm.controls['phone'].invalid" class="alert alert-danger">
+          <div *ngIf="createForm.controls['phone'].errors && createForm.controls['phone'].errors['required']">Phone is required.</div>
+          <div *ngIf="createForm.controls['phone'].errors">Please, enter valid 10 digit phone number.</div>
+        </div>
+      </div>
+      <div class="mb-1">
+        <label for="">Location</label>
+        <input type="text" formControlName="location" class="form-control mb-2">
+        <div *ngIf="createForm.controls['location'].touched && createForm.controls['location'].invalid" class="alert alert-danger">
+          <div *ngIf="createForm.controls['location'].errors && createForm.controls['location'].errors['required']">Location is required.</div>
+          <div *ngIf="createForm.controls['location'].errors && createForm.controls['location'].errors['location']">Please, enter valid Location.</div>
+        </div>
+      </div>
+      <button type="submit" [disabled]="createForm.invalid" class="btn btn-primary mt-3 float-right">Add</button>
+    </form>
+  </div>
+</ng-template>
+
+
+
