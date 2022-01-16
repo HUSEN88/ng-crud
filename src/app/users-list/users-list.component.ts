@@ -42,7 +42,6 @@ export class UsersListComponent implements OnInit {
     this.loader = true;
     this.crudService.getUsers().subscribe((users:any) => {
       this.users = users;
-      console.log(this.users);
       if(this.searching) {
         this.searchInput();
       }
@@ -57,7 +56,6 @@ export class UsersListComponent implements OnInit {
 
   // deleting user
   deleteUser(id: number) {
-    console.log('hi')
     this.crudService.deleteUser(id).subscribe(() => {
       this.error = false;
       this.getUsers();

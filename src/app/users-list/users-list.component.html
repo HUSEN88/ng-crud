@@ -12,9 +12,9 @@
       aria-describedby="search text box">
     </div>
   </div>
-
   <button type="button" class="btn btn-primary create-btn"(click)="openModal(createTemplate)">Create</button>
 </div>
+
 <div class="data-wrapper">
   <table class="table table-hover" *ngIf="users">
     <thead>
@@ -45,7 +45,7 @@
       </tr>
     </tbody>
   </table>
-  <div class="spinner-grow" role="status" *ngIf="loader">
+  <div class="spinner-border" role="status" *ngIf="loader">
     <span class="sr-only">Loading...</span>
   </div>
   <div class="alert alert-danger" role="alert" *ngIf="error">
@@ -53,6 +53,7 @@
   </div>
 </div>
 
+<!-- modal for creating user -->
 <ng-template #createTemplate>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Add User</h4>

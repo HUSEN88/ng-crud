@@ -11,6 +11,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     AppComponent,
     UsersListComponent,
     UserDetailsComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

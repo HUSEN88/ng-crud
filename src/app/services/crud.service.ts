@@ -17,37 +17,41 @@ export class CrudService {
 
   constructor(private http: HttpClient) { }                     //Injecting HTTP service to communicate with the data
 
+  // get users list
   getUsers() {
     return this.http.get(this.apiurl).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.error(error);
+        console.log(error);
         return throwError(() => error);
       })
     );
   }
 
+  //delete a user
   deleteUser(id: number) {
     return this.http.delete(this.apiurl + '/' + id).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.error(error);
+        console.log(error);
         return throwError(() => error);
       })
     );
   }
 
+  // get single user details
   getUser(id: number) {
     return this.http.get(this.apiurl + '/' + id).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.error(error);
+        console.log(error);
         return throwError(() => error);
       })
     );
   }
 
+  // add user
   createUser(user:User) {
     return this.http.post(this.apiurl, user, this.httpOptions).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.error(error);
+        console.log(error);
         return throwError(() => error);
       })
     );

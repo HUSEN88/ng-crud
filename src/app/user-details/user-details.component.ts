@@ -16,11 +16,13 @@ export class UserDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private crudService: CrudService) { }
 
   ngOnInit(): void {
+    // getting id from url
     this.route.params.subscribe(params => {
       console.log(params)
       this.userid = params['id'];
       console.log(this.userid)
       this.loader = true;
+      // fetching user details by id
       this.getUser();
     });
   }
