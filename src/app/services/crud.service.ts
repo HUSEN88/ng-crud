@@ -27,7 +27,7 @@ export class CrudService {
   }
 
   deleteUser(id: number) {
-    return this.http.delete(this.apiurl + '//' + id).pipe(
+    return this.http.delete(this.apiurl + '/' + id).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error(error);
         return throwError(() => error);
